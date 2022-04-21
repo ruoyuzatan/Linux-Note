@@ -6,3 +6,5 @@ uname -r #查看Linux内核版本
 ls -lh #查看文件大小（以Kb、Mb显示）
 
 #SCSI/SATA/USB硬盘设备名为/dev/sd[a-p]
+
+#根目录为"/"，所有文件都由根目录"/"衍生而来
