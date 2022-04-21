@@ -1,0 +1,7 @@
+#1安装ssh
+sudo apt-get install ssh
+#2用本文件中的sshd_config替换原先的sshd_config
+#3启动服务
+service sshd start
+#重启SSH： service sshd restart
+#设置开机运行： chkconfig sshd on
