@@ -1,0 +1,78 @@
+#一、硬件
+uname -r #查看Linux内核版本
+ls -lh #查看文件大小（以Kb、Mb显示）
+#SCSI/SATA/USB硬盘设备名为/dev/sd[a-p]
+#根目录为"/"，所有文件都由根目录"/"衍生而来
+
+#二、系统
+#Linux默认的情况下会提供6个Terminal来让用户登录，切换的方式为使用Ctrl+Alt+F1~F6
+Ctrl+Alt+F1~F6 #文字登录界面 tty1~tty6
+Ctrl+Alt+F7 #图形界面桌面
+#从文字界面启动图形界面
+startx
+
+    #将任务转至前台运行
+fg %jobnumber #%jobnumber是通过jobs命令查到的后台正在执行的命令的序号(不是pid)
+
+#将任务转至后台运行，关闭终端也不停止
+nohup <命令> &
+#输出文件在nohup.out,可以用>命令修改输出文件
+#有时候可能会报一个提示：
+$ nohup: ignoring input and redirecting stderr to stdout
+#这个影响不大，不用紧张，也可以加多一个 2>&1 就不会出现这个问题
+#用法：
+nohup XXXXXX.sh >> /runtime/deletedata.log 2>&1 &
+#运行这个命令之后呢，会输出一个进程号，类似上面的输出，可以使用 top 命令查看运行中的进程，也可以用 ps -aux 查看进程
+#想要终止这个进程的话只能杀死这个进程，使用 kill 指令处理
+kill -9 进程号
+
+#让程序在后台运行，然后用disown继续运行
+#ctrl+z让程序在后台暂停运行后 需要用bg 1让程序继续运行
+$ ./test.sh &
+[1] 2539
+$ jobs -l
+[1]+  2539 Running                 ./test.sh &
+$ disown -h %1
+$ ps -ef | grep test
+
+#常用解压命令
+tar -czvf test.tar.gz /home/test
+gunzip  -c <需要解压的文件名> > <输出文件名> #这种方式可以保留原文件
+pig <需要压缩的文件名> #生成gz文件，并保留原文件
+pigz -d <需要解压的文件名> -k -p 12#解压,-k是保留源文件，-p是指定线程
+unzip <需要解压的文件名> -d #解压到文件目录（默认解压到本地）#解压zip文件
+
+ls *.tar.gz | xargs -n | tar xzvf #批量解压.tar.gz命令
+for i in $(ls *.gz);do pigz -d -k -p 12 $i;done #批量解压.gz文件;可将指令用pigz进行替换，来实现压缩
+for i in $(ls *.fastq);do pigz -k -p 12 $i;done #批量解压.gz文件;可将指令用pigz进行替换，来实现压缩
+
+#常用下载命令
+wget -c <website>
+#批量下载文件
+wget -r -c -nH -np ftp://ftp.bioinfo.wsu.edu/species/Potentilla_micrantha/
+
+#-r 递归下载子目录文件
+#-c 断点续传
+#-nH 不创建主机目录
+#-np 不追溯父文件夹
+
+aria2c -c <website> #可用于磁力链接的下载
+
+#查看文件内容
+cat
+less
+head
+
+#查看文件大小
+ls-lh
+
+#查看文件行数
+wc-l
+
+#根据文件类型批量复制文件
+for i in $(ls *_1.fq);do cp $i mkdir;done #批量解压.gz文件;可将指令用pigz进行替换，来实现压缩
+
+#软件安装
+#deb包的安装
+sudo dpkg -i package_name.deb
+sudo apt-get -f install #如果安装不成功，则用此命令安装依赖
