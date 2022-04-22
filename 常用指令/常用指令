@@ -1,15 +1,51 @@
 #一、硬件
 uname -r #查看Linux内核版本
-ls -lh #查看文件大小（以Kb、Mb显示）
 #SCSI/SATA/USB硬盘设备名为/dev/sd[a-p]
 #根目录为"/"，所有文件都由根目录"/"衍生而来
 
 #二、系统
+#2.1 终端的切换
 #Linux默认的情况下会提供6个Terminal来让用户登录，切换的方式为使用Ctrl+Alt+F1~F6
 Ctrl+Alt+F1~F6 #文字登录界面 tty1~tty6
 Ctrl+Alt+F7 #图形界面桌面
 #从文字界面启动图形界面
 startx
+#2.2 语言的切换
+echo $LANG #显示目前的语言
+LANG=en_US #切换语言为美式英语
+LANG=zh_CN.UTF-8 #切换语言为中文
+#2.3 查看系统的使用状态
+who #查看目前有谁在线
+netstat -a #查看网络联机状态
+ps -aux #查看后台执行的程序
+#三、命令
+command [-option] parameter1 parameter2 #option中，-是缩写，--是全称
+  #当命令太长时，可以下一行使用反斜杠（\）来转义[Enter]，反斜杠后立刻接特殊字符，才能转义
+#3.1 显示日期的命令
+date #显示日期与时间
+date +%Y/%m/%d #年/月/日：2009/08/17
+date +%H:%M #17:04
+#3.2 显示日历的命令
+sudo apt-get install bsdmainutils #安装cal命令
+cal #显示日历
+cal 2022 #显示整年月历
+cal 10 2022 #显示某年某月日历
+#3.3 计算器
+bc #计算器
+scale=3 #显示小数位数
+3.4 热键
+#1、TAB按键 命令补齐和文件补齐
+#2、ctrl+c 中断程序
+#3、ctrl+d 退出文字页面
+
+3.5 查看帮助文件
+man [函数名] #查看函数操作说明，按q离开说明文件
+info [函数名] #提供易读性更强的网页版说明文件，按TAB键在链接间切换，“*”代表网络连接，按Enter键就可以快速跳到链接指定位置
+/usr/share/doc/ #该文件夹下有许多软件的说明书
+
+#3.2 ls的用法
+ls -al #显示所有文件及相关文件的属性
+ls -lh #查看文件大小（以Kb、Mb显示）
 
     #将任务转至前台运行
 fg %jobnumber #%jobnumber是通过jobs命令查到的后台正在执行的命令的序号(不是pid)
