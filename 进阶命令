@@ -1,0 +1,10 @@
+#同时运行几个脚本
+for ((i=1;i<=3;i++));
+do
+nohup bash ~/hanlei/script/trimmomatic${i}.sh >/home/hanlei/hanlei/script/logs/trimmomatic_run${i}.log 2>&1 &
+done
+
+for ((i=1;i<=3;i++));
+do
+nohup bash ~/hanlei/script/02rna-seq_align_count${i}.sh >/home/hanlei/hanlei/script/logs/02rna-seq_align_count${i}.log 2>&1 &
+done
