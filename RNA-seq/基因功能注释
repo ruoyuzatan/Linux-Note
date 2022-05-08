@@ -1,0 +1,30 @@
+零基础快速完成基因功能注释 / GO / KEGG / PFAM
+
+一、前言
+eggNOG-mapper 大名鼎鼎，是一款非常全面，高效，准确，且一直在更新的软件，对应的，该团队提供了网页接口，任何人可以提交蛋白序列文件，在极短的时间内（一般几分钟）完成基因功能注释，包括：
+1.具体功能描述信息
+2.Gene Onotoloy注释信息
+3.KEGG 注释信息
+4.PFAM 注释信息
+5.以及其他...
+
+二、如何使用 eggNOG-mapper 进行基因功能注释
+1.打开 eggNOG-mapper 主页
+http://eggnog-mapper.embl.de/
+2.选择输入模式，一般是输入蛋白序列
+2.选择本地输入文件，即蛋白序列集合（这个完全可以基于基因组序列.fa和基因结构注释文件.gff3/.gtf用TBtools提取）
+3.给定一个邮箱地址（注意，这个非常重要，需要进入邮箱才能启动任务）
+4.点击 Start
+5.等待文件上传，一般大概不到一分钟，弹出页面
+6.打开自己的邮箱，Click to manage your job，点击 “Start job”即可，几分钟后即可收到结果
+7.点开链接，下载.annotations文件
+
+三、TBtools处理注释结果-eggNOG-mapper Helper
+1.设置输入文件和输出目录
+2.查看结果
+out.emapper.annotations.description.txt，对应的功能文本描述
+out.emapper.annotations.GO.txt，对应的是GO注释结果，可直接用于 TBtools GO富集分析，当注释背景文件
+out.emapper.annotations.KEGG_Knum.txt，对应的是KEGG注释结果，可直接用于 TBtools KEGG富集分析，当背景注释文件
+out.emapper.annotations.pfam.domain.txt，对应的是PFAM结构域注释，注意，这个注释结果是定性的，即有无某结构域，如果一个序列有多个相同结构域，只会显示一个
+
+参考链接：https://www.jianshu.com/p/65c8e863e47c
