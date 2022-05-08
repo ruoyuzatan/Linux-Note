@@ -1,5 +1,5 @@
 #一、硬件
-uname -r #查看Linux内核版本
+
 #SCSI/SATA/USB硬盘设备名为/dev/sd[a-p]
 #根目录为"/"，所有文件都由根目录"/"衍生而来
 
@@ -42,6 +42,9 @@ init 3 #命令行模式
 init 5 #含有图形界面模式
 init 6 #重启
 
+#2.6 查看系统信息
+uname -r #查看Linux内核版本
+lsb_release -a #查看系统版本
 
 #三、基础命令
 command [-option] parameter1 parameter2 #option中，-是缩写，--是全称
@@ -92,6 +95,21 @@ chmod [-R] xyz 文件或目录 #改变文件的权限，-R：递归，x/y/z=rwx�
 chmod u=rwx go=rx rna.sh #u：user，g：group，o：owner，a：all
 chmod a+w a-x #+：增加权限，-：删除权限
 
+#4.3 目录相关操作
+cd #切换目录
+cd. #当前目录
+cd .. #回到上级目录
+cd - #回到刚才的目录
+
+pwd [-P] #显示出当前的路径，而非使用连接（link）路劲
+
+mkdir [-mp] 目录名称 #新建新目录
+#-m 设置文件权限
+#-p 创建多层目录
+
+rmdir [-p] 目录名称 #删除目录
+rmdir -r 目录名称 #删除目录及目录中的文件
+
 #将任务转至前台运行
 fg %jobnumber #%jobnumber是通过jobs命令查到的后台正在执行的命令的序号(不是pid)
 
@@ -106,6 +124,9 @@ nohup XXXXXX.sh >> /runtime/deletedata.log 2>&1 &
 #运行这个命令之后呢，会输出一个进程号，类似上面的输出，可以使用 top 命令查看运行中的进程，也可以用 ps -aux 查看进程
 #想要终止这个进程的话只能杀死这个进程，使用 kill 指令处理
 kill -9 进程号
+#查看正在运行的脚本
+ps -aux | grep "trimmomatic.sh"
+kill 进程号
 
 #让程序在后台运行，然后用disown继续运行
 #ctrl+z让程序在后台暂停运行后 需要用bg 1让程序继续运行
@@ -157,3 +178,6 @@ for i in $(ls *_1.fq);do cp $i mkdir;done #批量解压.gz文件;可将指令用
 #deb包的安装
 sudo dpkg -i package_name.deb
 sudo apt-get -f install #如果安装不成功，则用此命令安装依赖
+#deb包的卸载
+ dpkg -l |grep virtualbox #查看软件版本号
+ sudo apt-get remove virtualbox-4.2 #执行卸载
