@@ -1,0 +1,32 @@
+#如何用 SIMCA 软件做出符合 SCI 论文的美图？
+1. 将实验数据输入 Excel 表格
+
+2. 将数据导入 SIMCA
+
+1. 按照「File」→「New Spreadsheet」→「From file」→「Import Dataset」，将数据导入到 SIMCA。
+
+2. 将横行和纵行第一行均设置为「Primary」。
+
+3. 按照「Edit」→「Transpose」将数据格式转变成横行为为主要因素，纵行样本编号，然后将数据保存「「Home」→「Finish」」。
+
+3. 数据分析
+
+将保存的源文件打开，点击「Home」→「Autofit」，然后鼠标移向「Project Window」→「Active model」，PCA 模型下可以看到 R2 和 Q2，可用于判断数据分析的可靠性。
+
+1. PCA、PLS-DA 和 OPLS-DA 图
+
+依次选择「Home」→「New」→「Observations」，将实验数据进行分组，model type 选用 PCA-X，确定后对数据进行拟合「「Home」→「Autofit」」，再点击 Scores，即可做出 PCA 图。在做 PLS-DA 或 OPLS-DA 图时，只需在 Change Model Type 将 PCA 改为 PLS-DA 或 OPLS-DA 即可。
+
+「SMICA 软件一般默认的模式是 UV，可在「Home」→「New」→「scale」中进行改变」。
+
+2. S-plot 图
+
+将「Home」→「New」→「Scale」→「Set Scaling」中的 Type 设置为 par 模型，只能选择两个组别「「Home」→「New」→「Observations」」，将 model type 改为 OPLS-DA，然后确定，再将数据进行拟合「「Home」→「Autofit」」；然后选择「Analysis」→「S-plots」→「S-plot」，即可做出我们所需的 S-plot。
+
+3. 差异物的寻找
+
+通常文献中对于差异物的寻找都是 VIP 值结合 pcorr。
+
+VIP:「Home」→「VIP」， 右键「Create」→「List」→「Save List as」为 txt 格式，再将 txt 格式复制到 Excel 中，一般选用 M1.VIP［1］ 这一列。
+
+pcorr: S－plot 图 右键「Create」→「List」→「Save list as」为 txt 格式，再将 txt 格式复制到 Excel 中，一般选用 M1. P「corr」［1］ 这一列结合 Vip 值寻找差异代谢物。
